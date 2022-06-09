@@ -1,0 +1,18 @@
+# Virtual Environment 
+venv
+
+# Environment Variables
+.env
+
+# Cache
+__pycache__
+.pyc
+.pytest_cache
+
+# Tests
+.coverage
+htmlcov
+
+# VS Code
+.vscode
+

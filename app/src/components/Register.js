@@ -1,12 +1,17 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { userRegex, passwordRegex } from '../utils/regex'
+// import axios from '../api/axios';
+import axios from 'axios';
+
+import { userRegex, passwordRegex } from '../utils/regex';
 
 function Register() {
     const usernameRef = useRef();
     const errorRef = useRef();
+
+    const [showPassword, setShowPassword] = useState(false)
 
     const [username, setUsername] = useState('');
     const [validUsername, setValidUsername] = useState(false);
@@ -22,6 +27,8 @@ function Register() {
 
     const [errorMessage, setErrorMessage] = useState('');
     const [success, setSuccess] = useState(false);
+
+    console.log(showPassword)
 
     useEffect(() => {
         usernameRef.current.focus();
@@ -56,8 +63,27 @@ function Register() {
             setErrorMessage("Invalid Entry, please try again");
             return;
         } else {
-            console.log(username, password);
-            setSuccess(true);
+            try {
+                const response = await axios.post('/register', JSON.stringify({ username, password}), 
+                {
+                    headers: { 'Content-Type': 'application/json'},
+                    withCredentials: true
+                })
+                console.log(response.data);
+                console.log(response.accessToken);
+                console.log(JSON.stringify(response))
+                setSuccess(true);
+                // clear input fields 
+            } catch (error) {
+                if (!error?.response) {
+                    setErrorMessage('No Server Response')
+                } else if (error.response?.status === 409) {
+                    setErrorMessage('Username Taken')
+                } else {
+                    setErrorMessage('Registration Failed');
+                }
+                errorRef.current.focus();
+            }
         }
     }
 
@@ -109,9 +135,10 @@ function Register() {
                             <span className={validPassword || !password ? 'hide' : 'invalid'}>
                                 <FontAwesomeIcon icon={faTimes} />
                             </span>
+                            <button type='submit' onClick={() => setShowPassword(!showPassword)}>Show Password</button>
                         </label>
                         <input
-                            type='password'
+                            type={showPassword && password ? 'text' : 'password'}
                             id='password'
                             onChange={(event) => setPassword(event.target.value)}
                             required
@@ -139,7 +166,7 @@ function Register() {
                             </span>
                         </label>
                         <input
-                            type='password'
+                            type={showPassword && password ? 'text' : 'password'}
                             id='password-match'
                             onChange={(event) => setPasswordMatch(event.target.value)}
                             required
@@ -152,7 +179,7 @@ function Register() {
                             <FontAwesomeIcon icon={faInfoCircle} />
                             Must match the first password field.
                         </p>
-                        <button disabled={!validUsername || !validPassword || !validPasswordMatch ? true : false}>Sign Up</button>
+                        <button type='submit' disabled={!validUsername || !validPassword || !validPasswordMatch ? true : false}>Sign Up</button>
                         <p>
                             Already Registered?
                             <br />
