@@ -50,8 +50,8 @@ function Register() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         // if button were to be enabled by someone hacking JS 
-        const userRegexConfirmation = userRegex.text(username);
-        const passwordRegexConfirmation = passwordRegex.text(password);
+        const userRegexConfirmation = userRegex.test(username);
+        const passwordRegexConfirmation = passwordRegex.test(password);
         if (!userRegexConfirmation || !passwordRegexConfirmation) {
             setErrorMessage("Invalid Entry, please try again");
             return;
