@@ -1,7 +1,8 @@
 from flask import request
 from flask_restful import Resource
 from werkzeug.security import generate_password_hash
-from datetime import datetime
+from flask_jwt_extended import create_access_token, create_refresh_token
+from datetime import datetime, timedelta
 
 from backend.src.models.db import db
 from backend.src.models.models import User
@@ -20,5 +21,6 @@ class Register(Resource):
             user = User(email=email, username=data["username"], password=hashed_password, birthday=birthday, profile_picture=None)
             db.session.add(user)
             db.session.commit()
-            print("here")
-            return {"message": "User created succesfully."}, 201
+            access_token = create_access_token(identity=user.email, expires_delta=timedelta(minutes=20))
+            refresh_token = create_refresh_token(identity=user.email)
+            return {"message": "User created succesfully", "accessToken": access_token, "refreshToken": refresh_token}, 201
