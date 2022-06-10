@@ -3,24 +3,19 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 html {
     font-family: 'Nunito', sans-serif;
     font-size: 18px;
-    color: #fff;
 }
 
 body {
-    margin: 0;
-    min-height: 100vh;
     background-color: rgb(255, 245, 170);
 }
 
 .App {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh; 
@@ -29,20 +24,9 @@ body {
 section {
     width: 100%;
     max-width: 60%;
-    min-height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 1rem;
-    background-color: rgba(50, 50, 50, 0.15);
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    flex-grow: 1;
-    padding-bottom: 1rem;
+    min-height: 60%;
+    padding: 2rem;
+    background-color: white
 }
 
 .instructions {
@@ -60,7 +44,7 @@ form {
 
 .valid {
     color: limegreen;
-    margin-left: 0.3rem;
+    margin-left: 0.25rem;
 }
 
 .invalid {

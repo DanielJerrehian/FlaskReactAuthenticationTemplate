@@ -95,7 +95,7 @@ function Register() {
                 <section>
                     <Typography variant='h4'>Success!</Typography>
                     <Typography variant='p'>
-                        Sign in / Put React Router Link Here
+                        Sign in (Put React Router Link Here)
                     </Typography>
                 </section>
             ) : (
@@ -111,9 +111,8 @@ function Register() {
                     <Typography variant='h4' style={{ marginBottom: '1rem' }}>Register</Typography>
                     <form onSubmit={handleSubmit}>
                         <Stack spacing={2}>
-
                             <Stack spacing={1}>
-                                <InputLabel htmlFor='username'>
+                                <InputLabel htmlFor='username' style={{color: (usernameFocus ? 'black' : '')}}>
                                     Username:
                                     <span className={validUsername ? 'valid' : 'hide'}>
                                         <FontAwesomeIcon icon={faCheck} />
@@ -146,7 +145,7 @@ function Register() {
                                         4 to 24 characters. Must begin with a letter. Letters, numbers, underscores, and hyphens allowed.
                                     </ Typography>
                                 </Stack>
-                                <InputLabel htmlFor='password'>
+                                <InputLabel htmlFor='password' style={{color: (passwordFocus ? 'black' : '')}}>
                                     Password:
                                     <span className={validPassword ? 'valid' : 'hide'}>
                                         <FontAwesomeIcon icon={faCheck} />
@@ -189,7 +188,7 @@ function Register() {
                                         8 to 24 characters. Must include upper and lowercase letters, a number, and at least one special character (! @ # $ %).
                                     </ Typography>
                                 </Stack>
-                                <InputLabel htmlFor='password-match'>
+                                <InputLabel htmlFor='password-match' style={{color: (passwordMatchFocus ? 'black' : '')}}>
                                     Confirm Password:
                                     <span className={validPasswordMatch && passwordMatch ? 'valid' : 'hide'}>
                                         <FontAwesomeIcon icon={faCheck} />
