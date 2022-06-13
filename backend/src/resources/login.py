@@ -10,7 +10,7 @@ from backend.src.models.models import User
 class Login(Resource):
     def post(self):
         data = request.json
-        user = User.query.filter(User.email == data["email"]).first()
+        user = User.query.filter(User.username == data["username"]).first()
         if not user:
             return {"message": "No user found"}, 400
         else:

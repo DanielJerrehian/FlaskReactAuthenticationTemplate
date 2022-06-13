@@ -1,7 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 
-import Container from '@mui/material/Container';
+import { userRegex, passwordRegex } from '../utils/regex';
+
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import InputLabel from '@mui/material/InputLabel';
@@ -11,7 +12,6 @@ import Button from '@mui/material/Button';
 import { faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { userRegex, passwordRegex } from '../utils/regex';
 
 
 function Register() {
@@ -99,7 +99,6 @@ function Register() {
                     </Typography>
                 </section>
             ) : (
-
                 <section>
                     <Typography
                         variant='p'
