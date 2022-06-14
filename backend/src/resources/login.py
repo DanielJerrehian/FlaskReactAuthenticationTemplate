@@ -17,8 +17,8 @@ class Login(Resource):
         else:
             passwords_match = check_password_hash(pwhash=user.password, password=data["password"])
             if passwords_match:
-                access_token = create_access_token(identity=user.username, expires_delta=timedelta(seconds=10))
-                refresh_token = create_refresh_token(identity=user.username)
+                access_token = create_access_token(identity=user.username, expires_delta=timedelta(minutes=10))
+                refresh_token = create_refresh_token(identity=user.username, expires_delta=timedelta(hours=4))
                 response = make_response({"user": UserSchema().dump(user), "accessToken": access_token})               
                 set_refresh_cookies(response=response, encoded_refresh_token=refresh_token)                
                 return response

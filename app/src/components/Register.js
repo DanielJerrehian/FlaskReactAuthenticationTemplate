@@ -70,6 +70,7 @@ function Register() {
                         headers: { 'Content-Type': 'application/json' },
                         withCredentials: true
                     })
+                console.log(response);
                 setSuccess(true);
                 setUsername('');
                 setPassword('');
