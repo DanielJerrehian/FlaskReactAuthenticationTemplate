@@ -7,6 +7,7 @@ from backend.src.network.cors import cors
 from backend.src.authentication.jwt import jwt
 from backend.src.models.db import db
 from backend.src.models.marshmallow.ma import ma
+from backend.src.resources.favicon import FavIcon
 from backend.src.resources.tweets import Tweets
 from backend.src.resources.register import Register
 from backend.src.resources.login import Login
@@ -23,14 +24,17 @@ def create_app():
     
     load_dotenv(dotenv_path=".env")
     
-    app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
-    app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")
     app.config["ENV"] = "development"
     app.config["DEBUG"] = True
+    app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+    app.config["JWT_COOKIE_SECURE"] = False
+    app.config['JWT_TOKEN_LOCATION'] = ["headers", "cookies"]
+    app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")
     app.config["CORS_HEADERS"] = "Content-Type"
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+    api.add_resource(FavIcon, "//favicon.ico")
     api.add_resource(Tweets, "/tweets")
     api.add_resource(Register, "/register")
     api.add_resource(Login, "/login")

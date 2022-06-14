@@ -1,10 +1,11 @@
-from flask import request
+from flask import request, make_response
 from flask_restful import Resource
 from werkzeug.security import check_password_hash
-from flask_jwt_extended import create_access_token, create_refresh_token
+from flask_jwt_extended import create_access_token, create_refresh_token, set_refresh_cookies
 from datetime import timedelta
 
 from backend.src.models.models import User
+from backend.src.models.marshmallow.models.marshmallow_schemas import UserSchema
 
 
 class Login(Resource):
@@ -16,9 +17,11 @@ class Login(Resource):
         else:
             passwords_match = check_password_hash(pwhash=user.password, password=data["password"])
             if passwords_match:
-                access_token = create_access_token(identity=user.email, expires_delta=timedelta(minutes=20))
-                refresh_token = create_refresh_token(identity=user.email)
-                return {"accessToken": access_token, "refreshToken": refresh_token}, 200
+                access_token = create_access_token(identity=user.username, expires_delta=timedelta(seconds=10))
+                refresh_token = create_refresh_token(identity=user.username)
+                response = make_response({"user": UserSchema().dump(user), "accessToken": access_token})               
+                set_refresh_cookies(response=response, encoded_refresh_token=refresh_token)                
+                return response
             else:
                 return {"message": "Password incorrect"}, 401
                 

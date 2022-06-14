@@ -7,5 +7,5 @@ from backend.src.models.marshmallow.models.marshmallow_schemas import UserSchema
 class Users(Resource):
     @jwt_required()
     def get(self):
-        users = User.query.all()
+        users = User.query.filter(User.username != 'Admin').all()
         return {"users": UserSchema().dump(users, many=True)}, 200

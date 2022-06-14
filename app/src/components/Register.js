@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
+
+import axios from '../api/axios';
 
 import { userRegex, passwordRegex } from '../utils/regex';
 
@@ -11,7 +13,6 @@ import Button from '@mui/material/Button';
 
 import { faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 
 
 function Register() {
@@ -69,9 +70,6 @@ function Register() {
                         headers: { 'Content-Type': 'application/json' },
                         withCredentials: true
                     })
-                console.log(response?.data);
-                console.log(response?.data?.accessToken);
-                console.log(JSON.stringify(response))
                 setSuccess(true);
                 setUsername('');
                 setPassword('');
@@ -227,8 +225,8 @@ function Register() {
                                 Sign Up
                             </Button>
                             <Stack spacing={1}>
-                                <Typography variant='p'>Already Registered?</ Typography>
-                                <Typography variant='span'>Sign in (Put React Router Link Here)</ Typography>
+                                <Typography variant='p'>Already Have An Account?</ Typography>
+                                <Typography variant='span'><Link to='/login'>Sign In</Link></ Typography>
                             </Stack>
                         </Stack>
                     </form>

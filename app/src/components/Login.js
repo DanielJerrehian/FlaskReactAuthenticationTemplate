@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
+
+import axios from '../api/axios';
 
 import useAuth from '../hooks/useAuth'
 
@@ -16,13 +17,14 @@ function Login() {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location?.state?.from?.pathname || '/';
+    const from = location?.state?.from?.pathname || '/home';
 
     const usernameRef = useRef();
     const errorRef = useRef();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
@@ -45,11 +47,9 @@ function Login() {
                         withCredentials: true
                     }
                 )
-            // console.log(JSON.stringify(response?.data))
-            // console.log(JSON.stringify(response))
-            const accessToken = response?.data?.accessToken
-            const refreshToken = response?.data?.refreshToken
-            setAuth({ username, password, accessToken, refreshToken });
+            const accessToken = response?.data?.accessToken;
+            const role = response?.data?.user?.role;
+            setAuth({ username, password, role, accessToken });
             setUsername('');
             setPassword('');
             navigate(from, { replace: true });
@@ -115,7 +115,7 @@ function Login() {
                     </Button>
                     <Stack spacing={1}>
                         <Typography variant='p'>Need an Account?</ Typography>
-                        <Typography variant='span'>Sign Up (Put React Router Link Here)</ Typography>
+                        <Typography variant='span'><Link to='/register'>Sign Up</Link></ Typography>
                     </Stack>
                 </Stack>
             </form>
