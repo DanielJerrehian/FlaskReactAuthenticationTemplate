@@ -11,6 +11,7 @@ from backend.src.resources.favicon import FavIcon
 from backend.src.resources.tweets import Tweets
 from backend.src.resources.register import Register
 from backend.src.resources.login import Login
+from backend.src.resources.logout import Logout
 from backend.src.resources.refresh_token import RefreshToken
 from backend.src.resources.current_user import CurrentUser
 from backend.src.resources.users import Users 
@@ -39,6 +40,7 @@ def create_app():
     api.add_resource(Register, "/register")
     api.add_resource(Login, "/login")
     api.add_resource(RefreshToken, "/refresh-token")
+    api.add_resource(Logout, "/logout")
     api.add_resource(CurrentUser, "/current-user", endpoint='current-user')
     api.add_resource(Users, "/users")
     api.add_resource(ComposeTweet, "/compose/tweet")

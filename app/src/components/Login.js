@@ -7,13 +7,16 @@ import useAuth from '../hooks/useAuth'
 
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
 
 
 function Login() {
-    const { setAuth } = useAuth();
+    const { setAuth, persist, setPersist } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -67,6 +70,14 @@ function Login() {
         }
     }
 
+    const togglePersist = () => {
+        setPersist(prevPersist => !prevPersist);
+    }
+
+    useEffect(() => {
+        localStorage.setItem('persist', persist)
+    }, [persist])
+
     return (
         <section>
             <Typography
@@ -107,13 +118,19 @@ function Login() {
                             required
                         />
                     </Stack>
-                    <Button
-                        variant='contained'
-                        type='submit'
-                    >
-                        Sign In
-                    </Button>
-                    <Stack spacing={1}>
+                    <Button variant='contained' type='submit'>Sign In</Button>
+                    <FormGroup>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    onChange={togglePersist}
+                                    checked={persist}
+                                />
+                            }
+                            label={<InputLabel>Trust This Device?</InputLabel>}
+                        />
+                    </FormGroup>
+                    <Stack spacing={1} direction='row'>
                         <Typography variant='p'>Need an Account?</ Typography>
                         <Typography variant='span'><Link to='/register'>Sign Up</Link></ Typography>
                     </Stack>

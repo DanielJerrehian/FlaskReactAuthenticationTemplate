@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import RequireAuth from './components/RequireAuth';
+import PersistLogin from './components/PersistLogin';
 import { roles } from './utils/roles';
 
 import Layout from './components/Layout';
@@ -33,15 +34,17 @@ function App() {
                 <Route path='unauthorized' element={<Unauthorized />} />
 
                 {/* Private Routes */}
-                <Route element={<RequireAuth allowedRoles={[roles?.User, roles?.Admin]} />}>
-                    <Route path='home' element={<HomeAuthenticated />} />
-                    <Route path='users' element={<Users />} />
-                    <Route path='profile' element={<Profile />} />
-                    <Route path='lounge' element={<Lounge />} />
-                </Route>
+                <Route element={<PersistLogin />}>
+                    <Route element={<RequireAuth allowedRoles={[roles?.User, roles?.Admin]} />}>
+                        <Route path='home' element={<HomeAuthenticated />} />
+                        <Route path='users' element={<Users />} />
+                        <Route path='profile' element={<Profile />} />
+                        <Route path='lounge' element={<Lounge />} />
+                    </Route>
 
-                <Route element={<RequireAuth allowedRoles={[roles?.Admin]} />}>
-                    <Route path='admin' element={<Admin />} />
+                    <Route element={<RequireAuth allowedRoles={[roles?.Admin]} />}>
+                        <Route path='admin' element={<Admin />} />
+                    </Route>
                 </Route>
 
                 {/* Catch All */}

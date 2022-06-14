@@ -1,11 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import useLogout from '../hooks/useLogout';
 
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 
 function HomeAuthenticated() {
+    const navigate = useNavigate();
+    const logout = useLogout();
+
+    const logoutUser = async() => {
+        await logout();
+        navigate('/links')
+    }
+
     return (
         <section>
             <Stack spacing={4}>
@@ -22,6 +33,8 @@ function HomeAuthenticated() {
                     <Link to='/profile'>Profile</Link>
                     <Link to='/admin'>Admin Panel</Link>
                 </Stack>
+                <Button onClick={logoutUser} variant="contained">Log Out</Button>
+
             </Stack>
         </section>
     )
