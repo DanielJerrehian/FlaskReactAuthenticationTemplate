@@ -36,7 +36,7 @@ function App() {
                 {/* Private Routes */}
                 <Route element={<PersistLogin />}>
                     <Route element={<RequireAuth allowedRoles={[roles?.User, roles?.Admin]} />}>
-                        <Route path='home' element={<HomeAuthenticated />} />
+                        <Route path='/home' element={<HomeAuthenticated />} />
                         <Route path='users' element={<Users />} />
                         <Route path='profile' element={<Profile />} />
                         <Route path='lounge' element={<Lounge />} />
