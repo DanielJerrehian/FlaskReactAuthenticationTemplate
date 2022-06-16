@@ -5,7 +5,8 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 
-function HomeAuthenticated() {
+function HomeUnauthenticated() {
+    
     return (
         <section>
             <Stack spacing={4}>
@@ -31,4 +32,4 @@ function HomeAuthenticated() {
     )
 }
 
-export default HomeAuthenticated
+export default HomeUnauthenticated

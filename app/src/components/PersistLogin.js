@@ -1,13 +1,14 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 import useRefreshToken from '../hooks/useRefreshToken';
+import useAuth from '../hooks/useAuth';
 
 import CircularProgress from '@mui/material/CircularProgress';
 
-import useAuth from '../hooks/useAuth';
 
 const PersistLogin = () => {
+    const location = useLocation()
     const [isLoading, setIsLoading] = useState(true);
     const refresh = useRefreshToken();
     const { auth, persist } = useAuth();
@@ -26,11 +27,6 @@ const PersistLogin = () => {
         !auth?.accessToken ? verifyRefreshToken() : setIsLoading(false)
     }, [])
 
-    useEffect(() => {
-        console.log(`isLoading: ${isLoading}`)
-        console.log(`accessToken: ${JSON.stringify(auth?.accessToken)}`)
-    })
-
     return (
         <>
             {
@@ -38,7 +34,9 @@ const PersistLogin = () => {
                     ? <Outlet />
                     : isLoading 
                         ? <CircularProgress />
-                        : <Outlet /> 
+                        : auth?.accessToken && location.pathname === '/' || auth?.accessToken && location.pathname === '/register' || auth?.accessToken && location.pathname === '/login'
+                            ? <Navigate to='/home' state={{ from: location }} replace />
+                            : <Outlet /> 
             }
         </>
     )

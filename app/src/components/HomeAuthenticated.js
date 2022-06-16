@@ -24,6 +24,7 @@ function HomeAuthenticated() {
                 <Typography variant='h6'>This is Home Page for authenticated users</Typography>
                 <Stack spacing={1}>
                     <Typography variant='h6'>Public Links</Typography>
+                    <Link to='/'>Landing Page</Link>
                     <Link to='/about'>About</Link>
                 </Stack>
                 <Stack spacing={1}>

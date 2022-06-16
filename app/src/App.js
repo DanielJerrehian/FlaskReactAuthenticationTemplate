@@ -25,16 +25,16 @@ function App() {
     return (
         <Routes>
             <Route path='/' element={<Layout />}>
-                {/* Public Routes */}
-                <Route path='/' element={<HomeUnauthenticated />} />
-                <Route path='login' element={<Login />} />
-                <Route path='register' element={<Register />} />
-                <Route path='links' element={<Links />} />
-                <Route path='about' element={<About />} />
-                <Route path='unauthorized' element={<Unauthorized />} />
-
-                {/* Private Routes */}
                 <Route element={<PersistLogin />}>
+                    {/* Public Routes */}
+                    <Route path='/' element={<HomeUnauthenticated />} />
+                    <Route path='login' element={<Login />} />
+                    <Route path='register' element={<Register />} />
+                    <Route path='links' element={<Links />} />
+                    <Route path='about' element={<About />} />
+                    <Route path='unauthorized' element={<Unauthorized />} />
+
+                    {/* Private Routes */}
                     <Route element={<RequireAuth allowedRoles={[roles?.User, roles?.Admin]} />}>
                         <Route path='/home' element={<HomeAuthenticated />} />
                         <Route path='users' element={<Users />} />

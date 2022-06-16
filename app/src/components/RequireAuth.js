@@ -6,9 +6,9 @@ const RequireAuth = ({ allowedRoles }) => {
     const location = useLocation();
 
     return (
-        allowedRoles?.includes(auth?.role)
+        auth?.accessToken && allowedRoles?.includes(auth?.role)
             ? <Outlet /> // represents any child components of RequireAuth
-            : auth?.username
+            : auth?.accessToken
                 ? <Navigate to='/unauthorized' state={{ from: location }} replace />
                 : <Navigate to='/login' state={{ from: location }} replace />
     );
