@@ -62,6 +62,7 @@ function Login() {
             } else if (error?.response?.status === 400) {
                 setErrorMessage('Username not found');
             } else if (error?.response?.status === 401) {
+                // setPassword('');
                 setErrorMessage('Password Incorrect');
             } else {
                 setErrorMessage('Login Failed');

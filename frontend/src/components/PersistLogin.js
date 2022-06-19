@@ -34,7 +34,7 @@ const PersistLogin = () => {
                     ? <Outlet />
                     : isLoading 
                         ? <CircularProgress />
-                        : auth?.accessToken && location.pathname === '/' || auth?.accessToken && location.pathname === '/register' || auth?.accessToken && location.pathname === '/login'
+                        : (auth?.accessToken && location.pathname === '/') || (auth?.accessToken && location.pathname === '/register') || (auth?.accessToken && location.pathname === '/login')
                             ? <Navigate to='/home' state={{ from: location }} replace />
                             : <Outlet /> 
             }
