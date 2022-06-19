@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Users from './Users';
+import Users from '../Private/Users';
 
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';

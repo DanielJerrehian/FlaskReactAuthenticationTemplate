@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import axios from '../api/axios';
+import axios from '../../api/axios';
 
-import { userRegex, passwordRegex } from '../utils/regex';
+import { userRegex, passwordRegex } from '../../utils/regex';
 
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';

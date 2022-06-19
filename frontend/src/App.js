@@ -1,23 +1,23 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import RequireAuth from './components/RequireAuth';
-import PersistLogin from './components/PersistLogin';
+import RequireAuth from './components/Auth/RequireAuth';
+import PersistLogin from './components/Auth/PersistLogin';
 import { roles } from './utils/roles';
 
-import Layout from './components/Layout';
-import HomeUnauthenticated from './components/HomeUnauthenticated';
-import Login from './components/Login';
-import Register from './components/Register';
-import Links from './components/Links';
-import About from './components/About';
-import HomeAuthenticated from './components/HomeAuthenticated';
-import Users from './components/Users';
-import Profile from './components/Profile';
-import Lounge from './components/Lounge';
-import Admin from './components/Admin';
-import ErrorMissing from './components/ErrorMissing';
-import Unauthorized from './components/Unauthorized';
+import Layout from './components/Layout/Layout';
+import Home from './components/Private/Home';
+import Login from './components/Auth/Login';
+import Register from './components/Public/Register';
+import Links from './components/Public/Links';
+import About from './components/Public/About';
+import LandingPage from './components/Public/LandingPage';
+import Users from './components/Private/Users';
+import Profile from './components/Private/Profile';
+import Lounge from './components/Private/Lounge';
+import Admin from './components/Admin/Admin';
+import ErrorMissing from './components/Error/ErrorMissing';
+import Unauthorized from './components/Auth/Unauthorized';
 
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
             <Route path='/' element={<Layout />}>
                 <Route element={<PersistLogin />}>
                     {/* Public Routes */}
-                    <Route path='/' element={<HomeUnauthenticated />} />
+                    <Route path='/' element={<LandingPage />} />
                     <Route path='login' element={<Login />} />
                     <Route path='register' element={<Register />} />
                     <Route path='links' element={<Links />} />
@@ -36,7 +36,7 @@ function App() {
 
                     {/* Private Routes */}
                     <Route element={<RequireAuth allowedRoles={[roles?.User, roles?.Admin]} />}>
-                        <Route path='/home' element={<HomeAuthenticated />} />
+                        <Route path='home' element={<Home />} />
                         <Route path='users' element={<Users />} />
                         <Route path='profile' element={<Profile />} />
                         <Route path='lounge' element={<Lounge />} />

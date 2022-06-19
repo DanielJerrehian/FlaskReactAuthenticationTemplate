@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 
-function HomeUnauthenticated() {
+function LandingPage() {
     
     return (
         <section>
@@ -32,4 +32,4 @@ function HomeUnauthenticated() {
     )
 }
 
-export default HomeUnauthenticated
+export default LandingPage

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 
 import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -16,34 +16,6 @@ function Users() {
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
-
-    // useEffect(() => {
-    //     let isMounted = true;
-    //     // const controller = new AbortController();
-
-    //     const getUsers = async () => {
-    //         try {
-    //             const response = await axiosPrivate.get('/users', {
-    //                 // signal: controller.signal, 
-    //                 headers: { 'Content-Type': 'application/json' },
-    //                 withCredentials: true
-    //             });
-    //             isMounted && setUsers(response?.data?.users)
-    //             console.log(response?.data?.users)
-    //             setLoading(false);
-    //         } catch (error) {
-    //             console.error(error)
-    //             navigate('/login', { state: { from: location }, replace: true });
-    //         }
-    //     }
-
-    //     getUsers();
-
-    //     return () => {
-    //         isMounted = false;
-    //         // controller.abort();
-    //     }
-    // }, [])
 
     const getUsers = async () => {
         try {

@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
-import axios from '../api/axios';
+import axios from '../../api/axios';
 
-import useAuth from '../hooks/useAuth'
+import useAuth from '../../hooks/useAuth'
 
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -35,21 +35,13 @@ function Login() {
     }, [])
 
     useEffect(() => {
-        setErrorMessage('');
+        password && setErrorMessage('');
     }, [username, password])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios
-                .post(
-                    '/login',
-                    JSON.stringify({ username, password }),
-                    {
-                        headers: { 'Content-Type': 'application/json' },
-                        withCredentials: true
-                    }
-                )
+            const response = await axios.post('/login', JSON.stringify({ username, password }), { headers: { 'Content-Type': 'application/json' }, withCredentials: true })
             const accessToken = response?.data?.accessToken;
             const role = response?.data?.user?.role;
             setAuth({ username, password, role, accessToken });
@@ -62,14 +54,16 @@ function Login() {
             } else if (error?.response?.status === 400) {
                 setErrorMessage('Username not found');
             } else if (error?.response?.status === 401) {
-                // setPassword('');
+                setPassword('')
                 setErrorMessage('Password Incorrect');
+                console.log('here')
             } else {
                 setErrorMessage('Login Failed');
             }
-
         }
     }
+    
+    console.log(errorMessage)
 
     const togglePersist = () => {
         setPersist(prevPersist => !prevPersist);

@@ -1,17 +1,19 @@
 import { Outlet, useLocation, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import useRefreshToken from '../hooks/useRefreshToken';
-import useAuth from '../hooks/useAuth';
+import useRefreshToken from '../../hooks/useRefreshToken';
+import useAuth from '../../hooks/useAuth';
+import { redirectRoutes } from '../../utils/redirectRoutes';
 
 import CircularProgress from '@mui/material/CircularProgress';
 
 
 const PersistLogin = () => {
     const location = useLocation()
-    const [isLoading, setIsLoading] = useState(true);
     const refresh = useRefreshToken();
+    const [isLoading, setIsLoading] = useState(true);
     const { auth, persist } = useAuth();
+    const redirectList = redirectRoutes;
 
     const verifyRefreshToken = async () => {
         try {
@@ -25,6 +27,7 @@ const PersistLogin = () => {
 
     useEffect(() => {
         !auth?.accessToken ? verifyRefreshToken() : setIsLoading(false)
+        // eslint-disable-next-line
     }, [])
 
     return (
@@ -34,7 +37,7 @@ const PersistLogin = () => {
                     ? <Outlet />
                     : isLoading 
                         ? <CircularProgress />
-                        : (auth?.accessToken && location.pathname === '/') || (auth?.accessToken && location.pathname === '/register') || (auth?.accessToken && location.pathname === '/login')
+                        : auth?.accessToken && redirectList.includes(location.pathname)
                             ? <Navigate to='/home' state={{ from: location }} replace />
                             : <Outlet /> 
             }

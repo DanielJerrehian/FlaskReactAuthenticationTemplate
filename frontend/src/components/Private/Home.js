@@ -1,20 +1,20 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import useLogout from '../hooks/useLogout';
+import useLogout from '../../hooks/useLogout';
 
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 
-function HomeAuthenticated() {
+function Home() {
     const navigate = useNavigate();
     const logout = useLogout();
 
     const logoutUser = async() => {
         await logout();
-        navigate('/links')
+        navigate('/')
     }
 
     return (
@@ -41,4 +41,4 @@ function HomeAuthenticated() {
     )
 }
 
-export default HomeAuthenticated
+export default Home
