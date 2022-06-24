@@ -20,35 +20,37 @@ import ErrorMissing from './components/Error/ErrorMissing';
 import Unauthorized from './components/Auth/Unauthorized';
 
 
+
 function App() {
 
     return (
         <Routes>
             <Route path='/' element={<Layout />}>
-                <Route element={<PersistLogin />}>
-                    {/* Public Routes */}
-                    <Route path='/' element={<LandingPage />} />
-                    <Route path='login' element={<Login />} />
-                    <Route path='register' element={<Register />} />
-                    <Route path='links' element={<Links />} />
-                    <Route path='about' element={<About />} />
-                    <Route path='unauthorized' element={<Unauthorized />} />
+                
+                    <Route element={<PersistLogin />}>
+                        {/* Public Routes */}
+                        <Route path='/' element={<LandingPage />} />
+                        <Route path='login' element={<Login />} />
+                        <Route path='register' element={<Register />} />
+                        <Route path='links' element={<Links />} />
+                        <Route path='about' element={<About />} />
+                        <Route path='unauthorized' element={<Unauthorized />} />
 
-                    {/* Private Routes */}
-                    <Route element={<RequireAuth allowedRoles={[roles?.User, roles?.Admin]} />}>
-                        <Route path='home' element={<Home />} />
-                        <Route path='users' element={<Users />} />
-                        <Route path='profile' element={<Profile />} />
-                        <Route path='lounge' element={<Lounge />} />
+                        {/* Private Routes */}
+                        <Route element={<RequireAuth allowedRoles={[roles?.User, roles?.Admin]} />}>
+                            <Route path='home' element={<Home />} />
+                            <Route path='users' element={<Users />} />
+                            <Route path='profile' element={<Profile />} />
+                            <Route path='lounge' element={<Lounge />} />
+                        </Route>
+
+                        <Route element={<RequireAuth allowedRoles={[roles?.Admin]} />}>
+                            <Route path='admin' element={<Admin />} />
+                        </Route>
                     </Route>
 
-                    <Route element={<RequireAuth allowedRoles={[roles?.Admin]} />}>
-                        <Route path='admin' element={<Admin />} />
-                    </Route>
-                </Route>
-
-                {/* Catch All */}
-                <Route path='*' element={<ErrorMissing />} />
+                    {/* Catch All */}
+                    <Route path='*' element={<ErrorMissing />} />
             </Route>
         </Routes>
     );

@@ -1,8 +1,14 @@
-import React from 'react'
+import React from 'react';
+
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+
 
 function About() {
   return (
-    <section>This is the About Page</section>
+    <Container>
+        <Typography variant='p'>This is the About Page</Typography>
+    </Container>
   )
 }
 
