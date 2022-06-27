@@ -65,12 +65,11 @@ function Register() {
             return;
         } else {
             try {
-                const response = await axios.post('/register', JSON.stringify({ username, password }),
+                await axios.post('/register', JSON.stringify({ username, password }),
                     {
                         headers: { 'Content-Type': 'application/json' },
                         withCredentials: true
                     })
-                console.log(response);
                 setSuccess(true);
                 setUsername('');
                 setPassword('');

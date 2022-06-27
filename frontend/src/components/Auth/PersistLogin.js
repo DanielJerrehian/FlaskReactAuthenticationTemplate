@@ -27,7 +27,6 @@ const PersistLogin = () => {
 
     useEffect(() => {
         !auth?.accessToken ? verifyRefreshToken() : setIsLoading(false)
-        // eslint-disable-next-line
     }, [])
 
     return (
