@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from '../../api/axios';
 
 import useAuth from '../../hooks/useAuth'
+import useCurrentUser from '../../hooks/useCurrentUser';
 
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -17,6 +18,7 @@ import Checkbox from '@mui/material/Checkbox';
 
 function Login() {
     const { setAuth, persist, setPersist } = useAuth();
+    const { setCurrentUser } = useCurrentUser();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -44,7 +46,9 @@ function Login() {
             const response = await axios.post('/login', JSON.stringify({ username, password }), { headers: { 'Content-Type': 'application/json' }, withCredentials: true })
             const accessToken = response?.data?.accessToken;
             const role = response?.data?.user?.role;
-            setAuth({ username, password, role, accessToken });
+            const currentUser = response?.data?.user
+            setAuth({ username, role, accessToken });
+            setCurrentUser(currentUser)
             setUsername('');
             setPassword('');
             navigate(from, { replace: true });
@@ -61,7 +65,7 @@ function Login() {
             }
         }
     }
-    
+
     const togglePersist = () => {
         setPersist(prevPersist => !prevPersist);
     }

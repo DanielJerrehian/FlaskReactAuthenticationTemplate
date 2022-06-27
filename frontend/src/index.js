@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './context/AuthProvider';
+import { CurrentUserProvider } from './context/UserProvider';
 import NavBarController from './components/NavBar/NavBarController';
 import App from './App';
 
@@ -14,10 +15,12 @@ root.render(
     <React.StrictMode>
         <BrowserRouter>
             <AuthProvider>
-            <NavBarController />
-                <Routes>
-                    <Route path='/*' element={<App />} />
-                </Routes>
+                <CurrentUserProvider>
+                    <NavBarController />
+                    <Routes>
+                        <Route path='/*' element={<App />} />
+                    </Routes>
+                </CurrentUserProvider>
             </AuthProvider>
         </BrowserRouter>
     </React.StrictMode>
