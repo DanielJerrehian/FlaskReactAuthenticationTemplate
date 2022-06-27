@@ -56,15 +56,12 @@ function Login() {
             } else if (error?.response?.status === 401) {
                 setPassword('')
                 setErrorMessage('Password Incorrect');
-                console.log('here')
             } else {
                 setErrorMessage('Login Failed');
             }
         }
     }
     
-    console.log(errorMessage)
-
     const togglePersist = () => {
         setPersist(prevPersist => !prevPersist);
     }

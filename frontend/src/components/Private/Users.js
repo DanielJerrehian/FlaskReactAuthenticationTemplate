@@ -24,7 +24,6 @@ function Users() {
                 withCredentials: true
             });
             setUsers(response?.data?.users)
-            console.log(response?.data?.users)
         } catch (error) {
             console.error(error)
             navigate('/login', { state: { from: location }, replace: true });
