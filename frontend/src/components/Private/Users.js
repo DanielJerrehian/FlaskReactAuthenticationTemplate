@@ -49,10 +49,7 @@ function Users() {
                                         return (
                                             <ListItem disablePadding key={i}>
                                                 <ListItemText>
-                                                    <Link 
-                                                        to={`/${user?.username}`}
-                                                        state={{username: user?.username}}
-                                                    >
+                                                    <Link to={`/${user?.username}`}>
                                                         {user?.username}
                                                     </Link>   
                                                 </ListItemText>
