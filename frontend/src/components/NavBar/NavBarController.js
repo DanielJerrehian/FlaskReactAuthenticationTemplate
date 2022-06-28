@@ -29,11 +29,11 @@ function NavBarController() {
             return <NavBar navigate={navigate} linksLeft={linksLeft} linksRight={linksRight} />
         } else if (auth?.role === roles.Admin) {
             const linksLeft = [{ name: 'Home', route: '/' }, { name: 'Admin', route: 'admin' }, { name: 'Users', route: 'users' }, { name: 'Lounge', route: 'lounge' }]
-            const linksRight = [{ name: 'Logout', handleClick: logoutUser }]
+            const linksRight = [{ name: 'About', handleClick: () => handleNavigate('about') }, { name: 'Logout Admin', handleClick: logoutUser }]
             return <NavBar navigate={navigate} linksLeft={linksLeft} linksRight={linksRight} />
         } else if (auth?.role === roles.User) {
             const linksLeft = [{ name: 'Home', route: '/' }, { name: 'Users', route: 'users' }, { name: 'Lounge', route: 'lounge' }]
-            const linksRight = []
+            const linksRight = [{ name: 'About', handleClick: () => handleNavigate('about') }]
             const profile = true;
             const profileLinks = [{ name: 'My Profile', handleClick: () => handleNavigate(auth?.username) }, { name: 'Logout', handleClick: logoutUser }]
             return <NavBar navigate={navigate} linksLeft={linksLeft} linksRight={linksRight} profile={profile} profileLinks={profileLinks} />

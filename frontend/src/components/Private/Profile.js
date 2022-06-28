@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 
+import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -12,8 +13,9 @@ import Stack from '@mui/material/Stack';
 
 function Profile() {
     const { username } = useParams();
-    const [profile, setProfile] = useState({})
     const axiosPrivate = useAxiosPrivate();
+    const [loading, setLoading] = useState(true);
+    const [profile, setProfile] = useState({})
 
     const getUser = async () => {
         try {
@@ -25,6 +27,7 @@ function Profile() {
         } catch (error) {
             console.error(error)
         }
+        setLoading(false);
     }
 
     useEffect(() => {
@@ -36,14 +39,18 @@ function Profile() {
             <Stack spacing={2}>
                 <Typography variant='p'>This is the Profile Route and it is protected!</Typography>
                 <Divider />
-                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                    <Avatar
-                        alt={`${profile?.username}'s Profile Picture`}
-                        src={profile?.profile_picture_url}
-                        sx={{ width: 100, height: 100, marginRight: '1rem' }}
-                    />
-                    <Typography variant='h6'>{profile?.username}</Typography>
-                </Box>
+                { loading 
+                    ? <CircularProgress />
+                    : 
+                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                            <Avatar
+                                alt={`${profile?.username}'s Profile Picture`}
+                                src={profile?.profile_picture_url}
+                                sx={{ width: 100, height: 100, marginRight: '1rem' }}
+                            />
+                            <Typography variant='h6'>{profile?.username}</Typography>
+                        </Box>
+                }
             </Stack>
         </section>
     )
