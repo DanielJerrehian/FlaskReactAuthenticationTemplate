@@ -1,8 +1,6 @@
 from flask import request
 from flask_restful import Resource
 from werkzeug.security import generate_password_hash
-from flask_jwt_extended import create_access_token, create_refresh_token
-from datetime import datetime, timedelta
 
 from backend.src.models.db import db
 from backend.src.models.models import User

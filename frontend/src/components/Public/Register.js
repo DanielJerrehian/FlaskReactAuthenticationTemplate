@@ -92,9 +92,9 @@ function Register() {
             {success ? (
                 <section>
                     <Typography variant='h4'>Success!</Typography>
-                    <Typography variant='p'>
-                        Sign in (Put React Router Link Here)
-                    </Typography>
+                    <Typography variant='span'>
+                        <Link to='/login'>Sign In</Link>
+                    </ Typography>
                 </section>
             ) : (
                 <section>
@@ -226,7 +226,9 @@ function Register() {
                             </Button>
                             <Stack spacing={1}>
                                 <Typography variant='p'>Already Have An Account?</ Typography>
-                                <Typography variant='span'><Link to='/login'>Sign In</Link></ Typography>
+                                <Typography variant='span'>
+                                    <Link to='/login'>Sign In</Link>
+                                </ Typography>
                             </Stack>
                         </Stack>
                     </form>

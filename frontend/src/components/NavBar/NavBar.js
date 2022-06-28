@@ -90,7 +90,6 @@ function NavBar(props) {
                                     <IconButton
                                         size='large'
                                         aria-label='Current User'
-                                        aria-controls='menu-appbar'
                                         aria-haspopup='true'
                                         onClick={handleProfileMenu}
                                         color='inherit'
@@ -98,18 +97,19 @@ function NavBar(props) {
                                         <AccountCircle />
                                     </IconButton>
                                     <Menu
-                                        id='menu-appbar'
+                                        id='account-menu'
                                         anchorEl={profileAnchorElement}
                                         open={Boolean(profileAnchorElement)}
                                         anchorOrigin={{
                                             vertical: 'bottom',
                                             horizontal: 'center',
                                         }}
-                                        keepMounted
                                         transformOrigin={{
                                             vertical: 'top',
                                             horizontal: 'center',
                                         }}
+                                        keepMounted
+                                        disableScrollLock={true}
                                         onClose={handleClose}
                                     >
                                         {profileLinks.map((link, i) => {

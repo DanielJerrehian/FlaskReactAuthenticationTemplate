@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 
@@ -45,7 +45,20 @@ function Users() {
                         : users?.length
                             ? (
                                 <List>
-                                    {users.map((user, i) => <ListItem disablePadding key={i}><ListItemText>{user?.username}</ListItemText></ListItem>)}
+                                    {users.map((user, i) => {
+                                        return (
+                                            <ListItem disablePadding key={i}>
+                                                <ListItemText>
+                                                    <Link 
+                                                        to={`/${user?.username}`}
+                                                        state={{username: user?.username}}
+                                                    >
+                                                        {user?.username}
+                                                    </Link>   
+                                                </ListItemText>
+                                            </ListItem>
+                                        )
+                                    })}
                                 </List>
                             ) : (
                                 <Typography variant='p'>No users to display</Typography>

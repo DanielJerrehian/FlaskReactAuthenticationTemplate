@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useAuth from '../../hooks/useAuth';
@@ -33,12 +33,16 @@ function NavBarController() {
             return <NavBar navigate={navigate} linksLeft={linksLeft} linksRight={linksRight} />
         } else if (auth?.role === roles.User) {
             const linksLeft = [{ name: 'Home', route: '/' }, { name: 'Users', route: 'users' }, { name: 'Lounge', route: 'lounge' }]
-            const linksRight = [{ name: 'Logout', route: null, handleClick: logoutUser }]
+            const linksRight = []
             const profile = true;
             const profileLinks = [{ name: 'My Profile', handleClick: () => handleNavigate('profile') }, { name: 'Logout', handleClick: logoutUser }]
             return <NavBar navigate={navigate} linksLeft={linksLeft} linksRight={linksRight} profile={profile} profileLinks={profileLinks} />
         }
     }
+
+    useEffect(() => {
+        loadNavBar()
+    }, [auth])
 
     return (
         loadNavBar()
