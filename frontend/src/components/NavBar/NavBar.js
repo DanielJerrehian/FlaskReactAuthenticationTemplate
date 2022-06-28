@@ -123,6 +123,7 @@ function NavBar(props) {
                 </Toolbar>
             </AppBar>
         </Box>
+        
     )
 }
 

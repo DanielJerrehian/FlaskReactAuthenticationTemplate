@@ -1,11 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import useCurrentUser from '../../hooks/useCurrentUser';
+
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 
 function Home() {
+    const { currentUser } = useCurrentUser()
+
+
     return (
         <section>
             <Stack spacing={4}>
@@ -19,7 +24,7 @@ function Home() {
                     <Typography variant='h6'>Private Links</Typography>
                     <Link to='/users'>Users</Link>
                     <Link to='/lounge'>Lounge</Link>
-                    <Link to='/profile'>Profile</Link>
+                    <Link to={`/${currentUser?.username}`}>Profile</Link>
                     <Link to='/admin'>Admin Panel</Link>
                 </Stack>
             </Stack>

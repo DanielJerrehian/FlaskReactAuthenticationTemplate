@@ -35,7 +35,7 @@ function NavBarController() {
             const linksLeft = [{ name: 'Home', route: '/' }, { name: 'Users', route: 'users' }, { name: 'Lounge', route: 'lounge' }]
             const linksRight = []
             const profile = true;
-            const profileLinks = [{ name: 'My Profile', handleClick: () => handleNavigate('profile') }, { name: 'Logout', handleClick: logoutUser }]
+            const profileLinks = [{ name: 'My Profile', handleClick: () => handleNavigate(auth?.username) }, { name: 'Logout', handleClick: logoutUser }]
             return <NavBar navigate={navigate} linksLeft={linksLeft} linksRight={linksRight} profile={profile} profileLinks={profileLinks} />
         }
     }
