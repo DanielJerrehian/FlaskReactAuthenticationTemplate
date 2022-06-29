@@ -11,6 +11,5 @@ class Profile(Resource):
     @jwt_required()
     def get(self, username : str = None):
         sleep(.25)
-        user = User.query.filter(func.lower(User.username) == func.lower(username)).first()
-        profile = UserSchema().dump(user)
-        return {"profile": profile}, 200 if profile else 404
+        user = User.query.filter(func.lower(User.username) == func.lower(username)).first_or_404()
+        return {"profile": UserSchema().dump(user)}, 200

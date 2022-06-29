@@ -14,8 +14,8 @@ import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
 
-function NavBar(props) {
-    const { navigate, linksLeft, linksRight, profile, profileLinks } = props
+function NavBarPrivate(props) {
+    const { navigate, linksLeft, linksRight, accountIcon, profileLinks } = props
     const [menuAnchorElement, setMenuAnchorElement] = useState(null);
     const [profileAnchorElement, setProfileAnchorElement] = useState(null);
 
@@ -30,6 +30,8 @@ function NavBar(props) {
     const handleProfileMenu = (event) => {
         setProfileAnchorElement(event.currentTarget);
     };
+    
+    console.log(profileAnchorElement);
 
     const handleClose = () => {
         setMenuAnchorElement(null);
@@ -85,7 +87,7 @@ function NavBar(props) {
                             return <Button key={i} onClick={() => link.handleClick()} sx={{ color: 'white' }}>{link?.name}</Button>
                         })}
                         {
-                            profile && (
+                            accountIcon && (
                                 <div>
                                     <IconButton
                                         size='large'
@@ -127,4 +129,4 @@ function NavBar(props) {
     )
 }
 
-export default NavBar
+export default NavBarPrivate

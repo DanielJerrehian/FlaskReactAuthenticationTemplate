@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import ErrorMissing from '../Error/ErrorMissing';
 
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box'
@@ -14,6 +15,7 @@ import Stack from '@mui/material/Stack';
 function Profile() {
     const { username } = useParams();
     const axiosPrivate = useAxiosPrivate();
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [profile, setProfile] = useState({})
 
@@ -25,7 +27,10 @@ function Profile() {
             });
             setProfile(response?.data?.profile)
         } catch (error) {
-            console.error(error)
+            console.error(error);
+            if (error?.response?.status === 404) {
+
+            }
         }
         setLoading(false);
     }
