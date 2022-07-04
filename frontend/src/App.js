@@ -13,7 +13,7 @@ import Links from './components/Public/Links';
 import About from './components/Public/About';
 import LandingPage from './components/Public/LandingPage';
 import Users from './components/Private/Users';
-import ProfileController from './components/Private/ProfileController';
+import ProfileController from './components/Private/Profile/ProfileController';
 import Lounge from './components/Private/Lounge';
 import Admin from './components/Admin/Admin';
 import ErrorMissing from './components/Error/ErrorMissing';
