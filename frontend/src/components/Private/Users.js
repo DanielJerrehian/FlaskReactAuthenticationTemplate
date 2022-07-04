@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 
-import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
+import Stack from '@mui/material/Stack';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
+
 
 function Users() {
     const [loading, setLoading] = useState(true);
@@ -45,7 +46,17 @@ function Users() {
                         : users?.length
                             ? (
                                 <List>
-                                    {users.map((user, i) => <ListItem disablePadding key={i}><ListItemText>{user?.username}</ListItemText></ListItem>)}
+                                    {users.map((user, i) => {
+                                        return (
+                                            <ListItem disablePadding key={i}>
+                                                <ListItemText>
+                                                    <Link to={`/${user?.username}`}>
+                                                        {user?.username}
+                                                    </Link>   
+                                                </ListItemText>
+                                            </ListItem>
+                                        )
+                                    })}
                                 </List>
                             ) : (
                                 <Typography variant='p'>No users to display</Typography>

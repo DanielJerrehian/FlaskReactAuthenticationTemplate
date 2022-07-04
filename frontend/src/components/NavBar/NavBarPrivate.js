@@ -14,8 +14,8 @@ import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
 
-function NavBar(props) {
-    const { navigate, linksLeft, linksRight, profile, profileLinks } = props
+function NavBarPrivate(props) {
+    const { navigate, linksLeft, linksRight, accountIcon, profileLinks } = props
     const [menuAnchorElement, setMenuAnchorElement] = useState(null);
     const [profileAnchorElement, setProfileAnchorElement] = useState(null);
 
@@ -30,6 +30,8 @@ function NavBar(props) {
     const handleProfileMenu = (event) => {
         setProfileAnchorElement(event.currentTarget);
     };
+    
+    console.log(profileAnchorElement);
 
     const handleClose = () => {
         setMenuAnchorElement(null);
@@ -85,12 +87,11 @@ function NavBar(props) {
                             return <Button key={i} onClick={() => link.handleClick()} sx={{ color: 'white' }}>{link?.name}</Button>
                         })}
                         {
-                            profile && (
+                            accountIcon && (
                                 <div>
                                     <IconButton
                                         size='large'
                                         aria-label='Current User'
-                                        aria-controls='menu-appbar'
                                         aria-haspopup='true'
                                         onClick={handleProfileMenu}
                                         color='inherit'
@@ -98,18 +99,19 @@ function NavBar(props) {
                                         <AccountCircle />
                                     </IconButton>
                                     <Menu
-                                        id='menu-appbar'
+                                        id='account-menu'
                                         anchorEl={profileAnchorElement}
                                         open={Boolean(profileAnchorElement)}
                                         anchorOrigin={{
                                             vertical: 'bottom',
                                             horizontal: 'center',
                                         }}
-                                        keepMounted
                                         transformOrigin={{
                                             vertical: 'top',
                                             horizontal: 'center',
                                         }}
+                                        keepMounted
+                                        disableScrollLock={true}
                                         onClose={handleClose}
                                     >
                                         {profileLinks.map((link, i) => {
@@ -123,7 +125,8 @@ function NavBar(props) {
                 </Toolbar>
             </AppBar>
         </Box>
+        
     )
 }
 
-export default NavBar
+export default NavBarPrivate

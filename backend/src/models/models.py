@@ -8,6 +8,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
+    profile_picture_url = db.Column(db.String(120), nullable=False, default="https://images.unsplash.com/photo-1653669718797-5670d0b57ca2")
     role = db.Column(db.Integer, nullable=False, default=1)
     tweets = db.relationship("Tweet", uselist=True, order_by="desc(Tweet.id)", backref=backref('user', uselist=False), lazy=True)
     

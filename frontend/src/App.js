@@ -13,7 +13,7 @@ import Links from './components/Public/Links';
 import About from './components/Public/About';
 import LandingPage from './components/Public/LandingPage';
 import Users from './components/Private/Users';
-import Profile from './components/Private/Profile';
+import ProfileController from './components/Private/Profile/ProfileController';
 import Lounge from './components/Private/Lounge';
 import Admin from './components/Admin/Admin';
 import ErrorMissing from './components/Error/ErrorMissing';
@@ -40,7 +40,9 @@ function App() {
                         <Route element={<RequireAuth allowedRoles={[roles?.User, roles?.Admin]} />}>
                             <Route path='home' element={<Home />} />
                             <Route path='users' element={<Users />} />
-                            <Route path='profile' element={<Profile />} />
+                            {/* <Route path='profile' element={<Profile />} /> */}
+                            {/* <Route path='profile' /> */}
+                            <Route path=':username' element={<ProfileController />}/>
                             <Route path='lounge' element={<Lounge />} />
                         </Route>
 

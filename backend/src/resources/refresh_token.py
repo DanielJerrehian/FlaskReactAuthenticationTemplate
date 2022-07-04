@@ -1,9 +1,9 @@
-from flask import make_response
 from flask_restful import Resource
-from flask_jwt_extended import jwt_required, current_user, get_jwt_identity, create_access_token, set_access_cookies
+from flask_jwt_extended import jwt_required, current_user, get_jwt_identity, create_access_token
 from datetime import timedelta
 
 from backend.src.models.marshmallow.models.marshmallow_schemas import UserSchema
+
 
 class RefreshToken(Resource):
     @jwt_required(refresh=True)
